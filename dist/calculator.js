@@ -169,7 +169,7 @@ class BreedingSearchContext {
     }
     splitSharedRequiredParents(data) {
         if (data.length == 0) {
-            return [];
+            return [[[], []]];
         }
         else if (data.length == 1) {
             return [[[data[0]], []], [[], [data[0]]]];
@@ -284,10 +284,30 @@ class BreedingSearchContext {
         }
         return [];
     }
+    static instance = new BreedingSearchContext();
+}
+const allPalBreedingPower = Object.fromEntries(Object.entries(palRecords).map(([name, data]) => [name, data.value]));
+function calculateBreedingSortKey(tree, nullPalPower, requiredParents) {
+    if (tree === null) {
+        return { dist: 0, breedingPower: requiredParents.has(nullPalPower) ? 9999 : allPalBreedingPower[nullPalPower] };
+    }
+    else {
+        const { dist: lhsDist, breedingPower: lhsBreedingPower } = calculateBreedingSortKey(tree.left, tree.formula.lhs, requiredParents);
+        const { dist: rhsDist, breedingPower: rhsBreedingPower } = calculateBreedingSortKey(tree.right, tree.formula.rhs, requiredParents);
+        return {
+            dist: lhsDist + rhsDist + ((requiredParents.has(tree.formula.lhs) && requiredParents.has(tree.formula.rhs)) ? 0 : 1),
+            breedingPower: Math.min(lhsBreedingPower, rhsBreedingPower)
+        };
+    }
 }
 export function findBreedingTree(child, requiredParents, maxFormulaBudget, minFormulaBudget) {
-    const context = new BreedingSearchContext();
+    const context = BreedingSearchContext.instance;
     const results = context.findBreedingTree(child, requiredParents, maxFormulaBudget, minFormulaBudget);
+    results.sort((a, b) => {
+        const { dist: distA, breedingPower: breedingPowerA } = calculateBreedingSortKey(a, child, requiredParents);
+        const { dist: distB, breedingPower: breedingPowerB } = calculateBreedingSortKey(b, child, requiredParents);
+        return (distB - distA) || (breedingPowerB - breedingPowerA);
+    });
     return results;
 }
 //# sourceMappingURL=calculator.js.map

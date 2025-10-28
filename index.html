@@ -20,8 +20,8 @@
         <button id="theme-toggle" class="theme-button">Toggle Theme</button>
     </div>
 
-    <div id="app-container">
-        <div id="input-pane">
+    <div id="input-pane">
+        <div id="summary-pane">
             <div id="selection-summary">
             <h3 id="current-selections-title">Current Selections:</h3>
             <div>
@@ -32,12 +32,13 @@
                 <strong id="required-parents-label">Required Parents:</strong>
                 <div id="selected-parents-display">None</div>
             </div>
+            <button id="save-query-button" class="save-button">Save Query</button>
         </div>
         <hr>
         <div class="selector">
             <label for="child-search" id="child-search-label">Desired Pal:</label>
             <input type="text" id="child-search" placeholder="Search for a pal...">
-            <div id="child-list" class="pal-list"></div>
+            <div id="child-selector" class="pal-list"></div>
             <input type="hidden" id="child-selector-value">
         </div>
         <div class="selector">
@@ -64,9 +65,13 @@
             <div id="trees-container">
                 <p>Select a desired pal and available parents to see breeding trees.</p>
             </div>
-            </div>
         </div>
     </div>
+    <div id="favorites-pane">
+        <h2 id="favorite-queries-title">Favorite Queries</h2>
+        <div id="favorite-queries-container"></div>
+    </div>
+</div>
 
     <script type="module" src="dist/main.js"></script>
 </body>

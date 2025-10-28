@@ -1,25 +1,48 @@
+// UI Text Keys
+export const UI_TEXT_TITLE = "Palworld Breeding Path Finder";
+export const UI_TEXT_LANGUAGE = "Language:";
+export const UI_TEXT_CURRENT_SELECTIONS = "Current Selections:";
+export const UI_TEXT_DESIRED_PAL = "Desired Pal:";
+export const UI_TEXT_NONE = "None";
+export const UI_TEXT_REQUIRED_PARENTS = "Required Parents:";
+export const UI_TEXT_MAX_FORMULA_BUDGET = "Max Formula Budget:";
+export const UI_TEXT_MIN_FORMULA_TO_USE = "Min Formula to Use:";
+export const UI_TEXT_BREEDING_TREES = "Breeding Trees:";
+export const UI_TEXT_SELECT_DESIRED_PAL = "Select a desired pal.";
+export const UI_TEXT_SEARCH_FOR_PAL = "Search for a pal...";
+export const UI_TEXT_SEARCH_FOR_PARENTS = "Search for parents...";
+export const UI_TEXT_NO_VALID_TREE = "No valid breeding tree found within the specified steps.";
+export const UI_TEXT_TREE_NUMBER = "Tree #";
+export const UI_TEXT_MAX_4_PARENTS = "You can select a maximum of 4 parents.";
+export const UI_TEXT_CALCULATING = "Calculating...";
+export const UI_TEXT_TOGGLE_THEME = "Toggle Theme";
+export const UI_TEXT_SAVE_QUERY = "Save Query";
+export const UI_TEXT_PLEASE_SELECT_DESIRED_PAL = "Please select a desired pal first.";
+export const UI_TEXT_FAVORITE_QUERIES = "Favorite Queries";
 const zhCN = {
     "name": "简体中文",
     "texts": {
         // UI
-        "Palworld Breeding Path Finder": "幻兽帕鲁配种路径查找器",
-        "Language:": "语言：",
-        "Current Selections:": "当前选择：",
-        "Desired Pal:": "目标帕鲁：",
-        "None": "无",
-        "Required Parents:": "必要帕鲁：",
-        "Max Formula Budget:": "最大配种次数：",
-        "Min Formula to Use:": "最少配种次数：",
-        "Breeding Trees:": "配种方案：",
-        "Select a desired pal.": "请选择目标帕鲁以查看配种方案。",
-        "Search for a pal...": "搜索帕鲁...",
-        "Search for parents...": "搜索帕鲁...",
-        "No valid breeding tree found within the specified steps.": "在指定的步数内没有找到有效的配种方案。",
-        "Tree #": "方案 #",
-        "Select a desired pal and at least one available parent.": "请选择目标帕鲁和至少一个必要帕鲁。",
-        "You can select a maximum of 4 parents.": "最多只能选择4个必要帕鲁。",
-        "Calculating...": "计算中。没有一只帕鲁正在被屠宰...",
-        "Toggle Theme": "切换主题",
+        [UI_TEXT_TITLE]: "幻兽帕鲁配种路径查找器",
+        [UI_TEXT_LANGUAGE]: "语言：",
+        [UI_TEXT_CURRENT_SELECTIONS]: "当前选择：",
+        [UI_TEXT_DESIRED_PAL]: "目标帕鲁：",
+        [UI_TEXT_NONE]: "无",
+        [UI_TEXT_REQUIRED_PARENTS]: "必要帕鲁：",
+        [UI_TEXT_MAX_FORMULA_BUDGET]: "最大配种次数：",
+        [UI_TEXT_MIN_FORMULA_TO_USE]: "最少配种次数：",
+        [UI_TEXT_BREEDING_TREES]: "配种方案：",
+        [UI_TEXT_SELECT_DESIRED_PAL]: "请选择目标帕鲁以查看配种方案。",
+        [UI_TEXT_SEARCH_FOR_PAL]: "搜索帕鲁...",
+        [UI_TEXT_SEARCH_FOR_PARENTS]: "搜索帕鲁...",
+        [UI_TEXT_NO_VALID_TREE]: "在指定的步数内没有找到有效的配种方案。",
+        [UI_TEXT_TREE_NUMBER]: "方案 #",
+        [UI_TEXT_MAX_4_PARENTS]: "最多只能选择4个必要帕鲁。",
+        [UI_TEXT_CALCULATING]: "计算中。没有一只帕鲁正在被屠宰...",
+        [UI_TEXT_TOGGLE_THEME]: "切换主题",
+        [UI_TEXT_SAVE_QUERY]: "保存查询",
+        [UI_TEXT_PLEASE_SELECT_DESIRED_PAL]: "请先选择一个目标帕鲁。",
+        [UI_TEXT_FAVORITE_QUERIES]: "收藏的查询",
         // Pals
         "Lamball": "棉悠悠",
         "Cattiva": "捣蛋猫",

@@ -190,7 +190,7 @@ class BreedingSearchContext {
 
     splitSharedRequiredParents(data: PalName[]) : [PalName[], PalName[]][] {
         if (data.length == 0) {
-            return [];
+            return [[[], []]];
         }
         else if (data.length == 1) {
             return [[[data[0]], []], [[], [data[0]]]];
@@ -210,7 +210,7 @@ class BreedingSearchContext {
     }
 
     // FIXME: for performance reason, this function is not a complete search and may skip some valid breeding trees
-    expandBreedingTree(rootFormula: BreedingFormula, requiredParents: Set<PalName>, excludingPals: Set<PalName>, nFormula: number) : BreedingTreeNode[] {
+    expandBreedingTree(rootFormula: BreedingFormula, requiredParents: ReadonlySet<PalName>, excludingPals: ReadonlySet<PalName>, nFormula: number) : BreedingTreeNode[] {
         if (nFormula < 1) {
             return [];
         }
@@ -245,7 +245,7 @@ class BreedingSearchContext {
 
             const lhsReachableParents = this.getReachableParents(rootFormula.lhs, nLhsFormula);
             const rhsReachableParents = this.getReachableParents(rootFormula.rhs, nRhsFormula);
-            const lhsRequiredParents = Array.from(requiredParents).filter(p => lhsReachableParents.has(p)  && !rhsReachableParents.has(p));
+            const lhsRequiredParents = Array.from(requiredParents).filter(p => lhsReachableParents.has(p) && !rhsReachableParents.has(p));
             const rhsRequiredParents = Array.from(requiredParents).filter(p => rhsReachableParents.has(p) && !lhsReachableParents.has(p));
             const sharedRequiredParents = Array.from(requiredParents).filter(p => lhsReachableParents.has(p) && rhsReachableParents.has(p));
 
@@ -295,7 +295,7 @@ class BreedingSearchContext {
         return results;
     }
 
-    findBreedingTree(child: PalName, requiredParents: Set<PalName>, maxFormulaBudget: number, minFormulaBudget: number) : BreedingTreeNode[] {
+    findBreedingTree(child: PalName, requiredParents: ReadonlySet<PalName>, maxFormulaBudget: number, minFormulaBudget: number) : BreedingTreeNode[] {
         if (maxFormulaBudget < 1) {
             return [];
         }
@@ -320,10 +320,36 @@ class BreedingSearchContext {
 
         return [];
     }
+
+    static instance = new BreedingSearchContext();
 }
 
-export function findBreedingTree(child: PalName, requiredParents: Set<PalName>, maxFormulaBudget: number, minFormulaBudget: number) : BreedingTreeNode[] {
-    const context = new BreedingSearchContext();
+const allPalBreedingPower = Object.fromEntries(
+    Object.entries(palRecords).map(([name, data]) => [name as PalName, data.value])
+) as Record<PalName, number>;
+
+function calculateBreedingSortKey(tree: BreedingTreeNode | null, nullPalPower: PalName, requiredParents: ReadonlySet<PalName>) : {dist: number, breedingPower: number} {
+    if (tree === null) {
+        return {dist: 0, breedingPower: requiredParents.has(nullPalPower) ? 9999 : allPalBreedingPower[nullPalPower]};
+    }
+    else {
+        const {dist: lhsDist, breedingPower: lhsBreedingPower} = calculateBreedingSortKey(tree.left, tree.formula.lhs, requiredParents);
+        const {dist: rhsDist, breedingPower: rhsBreedingPower} = calculateBreedingSortKey(tree.right, tree.formula.rhs, requiredParents);
+        return {
+            dist: lhsDist + rhsDist + ((requiredParents.has(tree.formula.lhs) && requiredParents.has(tree.formula.rhs)) ? 0 : 1),
+            breedingPower: Math.min(lhsBreedingPower, rhsBreedingPower)
+        };
+    }
+}
+
+export function findBreedingTree(child: PalName, requiredParents: ReadonlySet<PalName>, maxFormulaBudget: number, minFormulaBudget: number) : BreedingTreeNode[] {
+    const context = BreedingSearchContext.instance;
     const results = context.findBreedingTree(child, requiredParents, maxFormulaBudget, minFormulaBudget);
+    results.sort((a, b) => {
+        const {dist: distA, breedingPower: breedingPowerA} = calculateBreedingSortKey(a, child, requiredParents);
+        const {dist: distB, breedingPower: breedingPowerB} = calculateBreedingSortKey(b, child, requiredParents);
+
+        return (distB - distA) || (breedingPowerB - breedingPowerA);
+    });
     return results;
 }
