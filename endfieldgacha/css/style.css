@@ -1,0 +1,218 @@
+:root {
+    --endfield-yellow: #fcee21;
+    --endfield-black: #000000;
+    --endfield-dark: #1a1a1a;
+    --endfield-grey: #8c8c8c;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: var(--endfield-dark);
+    margin: 0;
+    padding: 0;
+    /* Grid pattern background */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    margin-bottom: 30px;
+    background: var(--endfield-yellow);
+    display: inline-block;
+    padding: 5px 20px;
+    transform: skewX(-10deg); /* Slight italic/tech feel */
+    box-shadow: 5px 5px 0px var(--endfield-dark);
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace; /* Tech data feel */
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 10px 0;
+    border-left: 4px solid var(--endfield-yellow);
+    padding-left: 10px;
+}
+
+span {
+    color: var(--endfield-dark);
+    font-weight: 900;
+}
+
+.controls {
+    margin: 40px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+button {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 15px 30px;
+    border: 2px solid var(--endfield-dark);
+    background-color: transparent;
+    color: var(--endfield-dark);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    position: relative;
+    /* geometric clip path for corners */
+    clip-path: polygon(
+        0 0, 
+        100% 0, 
+        100% calc(100% - 10px), 
+        calc(100% - 10px) 100%, 
+        0 100%
+    );
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--endfield-yellow);
+    transition: width 0.2s ease;
+    z-index: -1;
+}
+
+button:hover::before {
+    width: 100%;
+}
+
+button:active {
+    transform: translateY(2px);
+}
+
+#pull-btn, #pull-10-btn, #pull-special-btn {
+    background-color: #fff;
+}
+
+/* Primary looking button equivalent */
+#pull-10-btn {
+    background-color: var(--endfield-dark);
+    color: var(--endfield-yellow);
+}
+
+#pull-10-btn::before {
+    background-color: #333; /* Slightly lighter on hover */
+}
+
+/* Special button */
+#pull-special-btn {
+    border-color: var(--endfield-yellow);
+    background-color: #fff;
+}
+
+/* Reset button styling */
+#reset-btn {
+    margin-left: auto;
+    border-color: #ff3333;
+    color: #ff3333;
+}
+#reset-btn::before {
+    background-color: #ff3333;
+}
+#reset-btn:hover {
+    color: white;
+}
+
+#result {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #ccc;
+}
+
+.pull-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.character-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+    position: relative;
+    transition: all 0.2s;
+    /* Tech border accent */
+    box-shadow: 0 4px 0 rgba(0,0,0,0.05);
+}
+
+.character-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 rgba(0,0,0,0.1);
+    border-color: var(--endfield-yellow);
+}
+
+/* Character Name */
+.character-card h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    font-weight: 900;
+}
+
+.character-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: normal;
+    border-left: none;
+    padding-left: 0;
+    color: #666;
+}
+
+/* Rarity Styles */
+.rarity-R6 {
+    border-top: 4px solid #FF7F00;
+}
+.rarity-R6 h3 {
+    color: #FF7F00;
+}
+
+.rarity-R5 {
+    border-top: 4px solid #FFD700;
+}
+.rarity-R5 h3 {
+    color: #b59800;
+}
+
+.rarity-R4 {
+    border-top: 4px solid #A020F0;
+}
+.rarity-R4 h3 {
+    color: #A020F0;
+}
+
+.rarity-R3 {
+    border-top: 4px solid #777;
+}
+
+/* Add some decorative "industrial" text */
+.container::before {
+    content: "ARKNIGHTS: ENDFIELD // GACHA SIMULATION PROTOCOL";
+    display: block;
+    font-size: 0.8rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}

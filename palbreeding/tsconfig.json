@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "es2022",
+    "outDir": "./dist",
+    "rootDir": "./js",
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node"
+  },
+  "include": [
+    "js/**/*.ts"
+  ]
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EndField Gacha Sim</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>明日方舟终末地 抽卡模拟器</h1>
+        <p>总寻访次数: <span id="draw-count">0</span></p>
+        <p>保底计数: <span id="pity-count">0</span></p>
+        <p>限定角色获得次数: <span id="up-count">0</span> | 其他六星获得次数: <span id="r6-count">0</span></p>
+        <div class="controls">
+            <button id="pull-btn">寻访一次</button>
+            <button id="pull-10-btn">寻访十次</button>
+            <button id="pull-special-btn">加急招募</button>
+            <button id="reset-btn">重置</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script type="module" src="dist/main.js"></script>
+</body>
+</html>
